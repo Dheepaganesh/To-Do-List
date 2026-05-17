@@ -1,7 +1,13 @@
+import Headers from "./components/Headers";
+import DataList from "./components/DataList";
+
 function App() {
   return (
     <>
-      <h1>To Do List</h1>
+      <Headers />
+      <section>
+        <DataList data={[]} />
+      </section>
     </>
   );
 }
