@@ -12,6 +12,10 @@ function App() {
     setInput(e.target.value);
   };
   const handleAdd = () => {
+    if (input.trim() === "") {
+      alert("Please enter a task name");
+      return;
+    }
     setData([
       ...data,
       { id: data.length + 1, name: input, isCompleted: taskStatus },
@@ -51,12 +55,15 @@ function App() {
   return (
     <>
       <Headers />
-      <section>
-        <div>
+      <section
+        className={`flex flex gap-4 items-center h-screen p-4 ${data.length > 0 ? `justify-around` : `justify-center`}`}
+      >
+        <div className="flex justify-center items-center w-[30%] p-8 bg-gray-100 rounded-md flex-col gap-4">
           <label htmlFor="task-name">Task Name</label>
           <input
             id="task-name"
             type="text"
+            className="border-2 border-gray-300 p-2 rounded-md w-full max-w-md"
             value={input}
             onChange={handleInput}
             placeholder="Enter task name"
@@ -64,18 +71,28 @@ function App() {
           <label htmlFor="task-status">Task Status</label>
           <select
             id="task-status"
+            className="border-2 border-gray-300 p-2 rounded-md w-full max-w-md"
             value={taskStatus}
             onChange={(e) => setTaskStatus(e.target.value === "true")}
           >
             <option value={"true"}>Completed</option>
             <option value={"false"}>Not Completed</option>
           </select>
-          <button onClick={editId ? handleUpdate : handleAdd}>
+          <button
+            onClick={editId ? handleUpdate : handleAdd}
+            className="bg-blue-500 text-white p-2 rounded-md w-full max-w-md"
+          >
             {editId ? "Update" : "Add"}
           </button>
         </div>
         {data.length > 0 ? (
-          <div>
+          <div
+            className={
+              data.length > 0
+                ? `w-1/2 p-8 bg-blue-100 rounded-md flex flex-col gap-4`
+                : `hidden`
+            }
+          >
             <DataList
               data={data}
               handleComplete={handleComplete}
