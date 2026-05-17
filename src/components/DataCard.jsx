@@ -15,8 +15,8 @@ const DataCard = ({ item, handleComplete, handleDelete, handleEdit }) => {
         <h2
           className={`min-w-0 flex-1 text-lg font-semibold sm:text-xl ${
             item.isCompleted
-              ? "text-slate-400 line-through decoration-slate-400/80 decoration-2 opacity-70"
-              : "text-slate-800"
+              ? "text-slate-800 decoration-slate-400/80 decoration-2 "
+              : "text-slate-400 opacity-70"
           }`}
         >
           {item.name}
