@@ -1,6 +1,7 @@
 import DataCard from "./DataCard";
 
 const DataList = ({ data }) => {
+  console.log(data);
   return (
     <>
       {data.length > 0
