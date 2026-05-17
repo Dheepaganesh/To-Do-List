@@ -29,7 +29,7 @@ The application allows users to add, edit, delete, and mark tasks as completed.
 Clone the repository:
 
 ```bash
-git clone <your-github-repository-link>
+git clone https://github.com/Dheepaganesh/To-Do-List.git
 ```
 
 Navigate to the project folder:
