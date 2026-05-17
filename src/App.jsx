@@ -5,6 +5,7 @@ import DataList from "./components/DataList";
 function App() {
   const [data, setData] = useState([]);
   const [input, setInput] = useState("");
+  const [editId, setEditId] = useState(null);
   const [taskStatus, setTaskStatus] = useState(false);
 
   const handleInput = (e) => {
@@ -15,6 +16,35 @@ function App() {
       ...data,
       { id: data.length + 1, name: input, isCompleted: taskStatus },
     ]);
+    setInput("");
+    setTaskStatus(false);
+  };
+  const handleComplete = (id) => {
+    setData(
+      data.map((item) =>
+        item.id === id ? { ...item, isCompleted: !item.isCompleted } : item,
+      ),
+    );
+  };
+  const handleDelete = (id) => {
+    setData(data.filter((item) => item.id !== id));
+  };
+  const handleEdit = (id) => {
+    setEditId(id);
+    const updatedData = data.filter((item) => item.id === id)?.[0];
+    setInput(updatedData?.name);
+    setTaskStatus(updatedData?.isCompleted);
+  };
+
+  const handleUpdate = () => {
+    setData(
+      data.map((item) =>
+        item.id === editId
+          ? { ...item, name: input, isCompleted: taskStatus }
+          : item,
+      ),
+    );
+    setEditId(null);
     setInput("");
     setTaskStatus(false);
   };
@@ -40,11 +70,18 @@ function App() {
             <option value={"true"}>Completed</option>
             <option value={"false"}>Not Completed</option>
           </select>
-          <button onClick={handleAdd}>Add</button>
+          <button onClick={editId ? handleUpdate : handleAdd}>
+            {editId ? "Update" : "Add"}
+          </button>
         </div>
         {data.length > 0 ? (
           <div>
-            <DataList data={data} />
+            <DataList
+              data={data}
+              handleComplete={handleComplete}
+              handleDelete={handleDelete}
+              handleEdit={handleEdit}
+            />
           </div>
         ) : null}
       </section>
