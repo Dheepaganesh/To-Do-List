@@ -5,34 +5,54 @@ import { IoCheckmarkDone } from "react-icons/io5";
 const DataCard = ({ item, handleComplete, handleDelete, handleEdit }) => {
   return (
     <>
-      <div className="bg-gray-100 p-4 rounded-md flex justify-between items-center">
-        <h2 className="text-2xl font-bold">{item.name}</h2>
-        <div className="flex items-center gap-12 min-w-[100px] justify-end">
+      <div
+        className={`flex flex-col gap-4 rounded-xl border p-4 shadow-md transition sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-3 sm:p-5 ${
+          item.isCompleted
+            ? "border-slate-200/60 bg-slate-50/80"
+            : "border-slate-200 bg-white hover:border-blue-200 hover:shadow-lg"
+        }`}
+      >
+        <h2
+          className={`min-w-0 flex-1 text-lg font-semibold sm:text-xl ${
+            item.isCompleted
+              ? "text-slate-400 line-through decoration-slate-400/80 decoration-2 opacity-70"
+              : "text-slate-800"
+          }`}
+        >
+          {item.name}
+        </h2>
+        <div className="flex min-w-[100px] flex-wrap items-center justify-end gap-3 sm:gap-4">
           {item.isCompleted && (
-            <FaCheck className="text-green-500 cursor-pointer underline-offset-2 underline" />
+            <FaCheck className="h-4 w-4 shrink-0 text-emerald-500" />
           )}
           <button
-            className={`${item.isCompleted ? `bg-red-500` : `bg-green-500`} text-white p-2 rounded-md`}
+            className={`flex h-10 w-10 items-center justify-center rounded-lg text-white shadow-sm transition hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+              item.isCompleted
+                ? "bg-amber-500 hover:bg-amber-600 focus:ring-amber-500/50"
+                : "bg-emerald-500 hover:bg-emerald-600 focus:ring-emerald-500/50"
+            }`}
             onClick={() => handleComplete(item.id)}
           >
             {item.isCompleted ? (
-              <MdUndo className="text-white cursor-pointer" />
+              <MdUndo className="h-5 w-5 cursor-pointer text-white" />
             ) : (
-              <IoCheckmarkDone className="text-white cursor-pointer" />
+              <IoCheckmarkDone className="h-5 w-5 cursor-pointer text-white" />
             )}
           </button>
         </div>
 
         <button
-          className="bg-blue-500 text-white p-2 rounded-md"
+          className="flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-blue-700 hover:shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2"
           onClick={() => handleEdit(item.id, item.name)}
         >
+          <FaEdit className="h-3.5 w-3.5" />
           Edit
         </button>
         <button
-          className="bg-red-500 text-white p-2 rounded-md"
+          className="flex items-center justify-center gap-2 rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-red-600 hover:shadow-md active:scale-95 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:ring-offset-2"
           onClick={() => handleDelete(item.id)}
         >
+          <FaTrash className="h-3.5 w-3.5" />
           Delete
         </button>
       </div>

@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/40 to-indigo-50/50 text-slate-900 antialiased;
+  }
+  #root {
+    @apply min-h-screen;
+  }
+}
